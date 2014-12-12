@@ -1,0 +1,43 @@
+.transition-element(@properties) {
+  -moz-transition: @properties;
+  -ms-transition: @properties;
+  -o-transition: @properties;
+  -webkit-transition: @properties;
+  transition: @properties;
+}
+
+.transform-element(@properties) {
+  -moz-transform: @properties;
+  -ms-transform: @properties;
+  -o-tranform: @properties;
+  -webkit-transform: @properties;
+  transform: @properties;
+}
+
+.animate-element(@properties) {
+  -moz-animation: @properties;
+  -ms-animation: @properties;
+  -o-animation: @properties;
+  -webkit-animation: @properties;
+  animation: @properties;
+}
+
+.top-border-radius(@amount: 3px) {
+  border-top-left-radius: @amount;
+  border-top-right-radius: @amount;
+}
+
+.bottom-border-radius(@amount: 3px) {
+  border-bottom-left-radius: @amount;
+  border-bottom-right-radius: @amount;
+}
+
+.left-border-radius(@amount: 3px) {
+  border-top-left-radius: @amount;
+  border-bottom-left-radius: @amount;
+}
+
+.right-border-radius(@amount: 3px) {
+  border-top-right-radius: @amount;
+  border-bottom-right-radius: @amount;
+}
