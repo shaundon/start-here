@@ -8,7 +8,7 @@ describe('startHere.constants module', function() {
         it('Should check it exists', inject(function(API_LOCATION) {
             expect(API_LOCATION).toBeDefined();
             expect(API_LOCATION).not.toBeNull();
-            expect(API_LOCATION).not.toBe('ATTRIBUTION_API_LOCATION_INSERTED_IN_BUILD_PROCESS');
+            expect(API_LOCATION).not.toBe('API_LOCATION_INSERTED_IN_BUILD_PROCESS');
         }));
     });
 });
