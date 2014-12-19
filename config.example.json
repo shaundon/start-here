@@ -1,0 +1,9 @@
+{
+    "stringReplacements": {
+        "externalApiLocation": {
+            "dev": "http://localhost:5555/app",
+            "stage": "https://some-staging-url.com/app",
+            "prod": "https://some-prod-url.com/app"
+        }
+    }
+}

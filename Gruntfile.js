@@ -2,14 +2,11 @@ module.exports = function(grunt) {
 
     require("matchdep").filterAll("grunt-*").forEach(grunt.loadNpmTasks);
 
+    var target = grunt.option('target') || 'dev';
+    var stringReplacementTarget = grunt.option('string-replacement-target') || target;
+
     // Locations of an external API.
-    // Depending on the type of build created, one of these
-    // will be inserted into the source code.
-    var API_LOCATIONS = {
-        DEV: 'http://localhost/',
-        STAGE: 'http://some-stage-url.com',
-        PROD: 'http://some.prod-url.com'
-    };
+    var EXTERNAL_API_LOCATION = grunt.file.readJSON('./config.json').stringReplacements.externalApiLocation[stringReplacementTarget];
 
     var jsFiles = require('wiredep')({
         includeSelf: true,
@@ -40,42 +37,37 @@ module.exports = function(grunt) {
             }
         },
 
-        // Karma runner. Runs unit tests
-        // for AngularJS based pages.
+        // Karma runner. Runs unit tests.
         karma: {
             unit: {
-                configFile: 'karma.conf.js'
+                options: {
+                    basePath: './',
+                    files: [
+                        'dist/scripts/main.min.js',
+                        'src/scripts/lib/angular-mocks/angular-mocks.js',
+                        'src/scripts/app/**/*.test.js'
+                    ],
+                    autoWatch: true,
+                    singleRun: true,
+                    frameworks: ['jasmine'],
+                    browsers: ['PhantomJS'],
+                    plugins: [
+                        'karma-chrome-launcher',
+                        'karma-phantomjs-launcher',
+                        'karma-jasmine'
+                    ]
+                }
             }
         },
 
         replace: {
-            dev: {
+            task: {
                 src: ['dist/scripts/main.min.js'],
                 overwrite: true,
                 replacements: [
                     {
                         from: 'API_LOCATION_INSERTED_IN_BUILD_PROCESS',
-                        to: API_LOCATIONS.DEV
-                    }
-                ]
-            },
-            stage: {
-                src: ['dist/scripts/main.min.js'],
-                overwrite: true,
-                replacements: [
-                    {
-                        from: 'API_LOCATION_INSERTED_IN_BUILD_PROCESS',
-                        to: API_LOCATIONS.STAGE
-                    }
-                ]
-            },
-            prod: {
-                src: ['dist/scripts/main.min.js'],
-                overwrite: true,
-                replacements: [
-                    {
-                        from: 'API_LOCATION_INSERTED_IN_BUILD_PROCESS',
-                        to: API_LOCATIONS.PROD
+                        to: EXTERNAL_API_LOCATION
                     }
                 ]
             }
@@ -111,17 +103,6 @@ module.exports = function(grunt) {
                     beautify: true,
                     compress: false,
                     sourceMap: true,
-                    mangle: false //mangling breaks angular stuff
-                },
-                files: {
-                    'dist/scripts/main.min.js': jsFiles
-                }
-            },
-            stage: {
-                options: {
-                    banner: "/*\nBuilt <%= grunt.template.today() %>.\nBuild version: STAGE.\n*/\n\n",
-                    compress: true,
-                    sourceMap: false,
                     mangle: false //mangling breaks angular stuff
                 },
                 files: {
@@ -176,17 +157,7 @@ module.exports = function(grunt) {
 
     });
 
-    // Default task(s).
-    grunt.registerTask('default', ['dev']);
-
-    // Dev task includes source maps and code is not minified.
-    grunt.registerTask('dev', ['build:dev', 'replace:dev', 'less:dev', 'test', 'e2e-tests']);
-
-    // Stage task does not include source maps, and code is minified.
-    grunt.registerTask('stage', ['build:stage', 'replace:stage', 'less:prod', 'test', 'e2e-tests']);
-
-    // Same as 'stage' task, but API location replacement will change.
-    grunt.registerTask('prod', ['build:prod', 'replace:prod', 'less:prod', 'test', 'e2e-tests']);
+    grunt.registerTask('default', ['build:' + target, 'replace', 'less:' + target, 'test', 'e2e-tests']);
 
     // Run unit tests. Will not work without running build process first
     // as relies on the concatenated code.
@@ -198,9 +169,6 @@ module.exports = function(grunt) {
 
     // Uglify in dev includes a source map and doesn't minify code.
     grunt.registerTask('build:dev', ['clean', 'mkdir', 'uglify:dev', 'copy']);
-
-    // Uglify in stage doesn't include a source map and minifies code.
-    grunt.registerTask('build:stage', ['clean', 'mkdir', 'uglify:stage', 'copy']);
 
     // Uglify in prod doesn't include a source map and minifies code.
     grunt.registerTask('build:prod', ['clean', 'mkdir', 'uglify:prod', 'copy']);
