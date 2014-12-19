@@ -15,15 +15,38 @@ This is an AngularJS based front end application, with a pre-configured build pr
 
 #### Dev (non minified, with source maps).
 
-    grunt dev
+    grunt --target=dev
+    
+or just use `grunt`, and it will default to this.
     
 #### Stage (non minified, with source maps).
 
-    grunt stage
+    grunt --target=stage
 
 #### Prod (minified, no source maps).
 
-    grunt prod
+    grunt --target=prod
+    
+### String Replacements
+
+Look in `config.example.json`. It contains three example API locations:
+
+    {
+        "stringReplacements": {
+            "externalApiLocation": {
+                "dev": "http://localhost:5555/app",
+                "stage": "https://some-staging-url.com/app",
+                "prod": "https://some-prod-url.com/app"
+            }
+        }
+    }
+    
+During the build process, one of these strings is selected, and then placed into the compiled JS in the appropriate location.
+This is determined by a command line flag passed to grunt, `--string-replacment-target=<target>`, for example
+`--string-replacment-target=dev` to use `https://some-staging-url.com/app`. If this flag is omitted,
+the `--target` flag will be used to determine this instead.
+
+This allows you to do fun things like build for `prod`, while inserting the `stage` API location.
     
 In `Gruntfile.js`, you'll find a variable named `API_LOCATIONS`. During the build process, a constant inside `/scripts/app/components/constants.js` is replaced with this, dependent on whether you're building for dev, stage or prod.
 
