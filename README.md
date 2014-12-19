@@ -20,11 +20,7 @@ First, ensure you have a `config.json` file. You can copy `config.example.json` 
     grunt --target=dev
     
 or just use `grunt`, and it will default to this.
-    
-#### Stage (non minified, with source maps).
-
-    grunt --target=stage
-
+   
 #### Prod (minified, no source maps).
 
     grunt --target=prod
