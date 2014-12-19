@@ -8,11 +8,12 @@ angular.module('startHere.moduleOne', [
 
         $routeProvider.when('/', {
             templateUrl: 'scripts/app/moduleOne/module-one.html',
-            controller: 'ModuleOneController'
+            controller: 'ModuleOneController',
+            controllerAs: 'controller'
         });
     }])
 
-    .controller('ModuleOneController', ['$scope', function($scope) {
-        $scope.foo = 'bar';
+    .controller('ModuleOneController', [function() {
+        this.foo = 'bar';
     }])
 ;

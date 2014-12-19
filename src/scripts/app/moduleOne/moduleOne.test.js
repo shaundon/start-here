@@ -14,7 +14,7 @@ describe('startHere.moduleOne module', function() {
     beforeEach(inject(function($rootScope, $controller, $q) {
 
         scope = $rootScope.$new();
-        controller = $controller('ModuleOneController', {
+        controller = $controller('ModuleOneController as controller', {
             $scope: scope
         });
     }));
@@ -26,7 +26,7 @@ describe('startHere.moduleOne module', function() {
         });
 
         it('should check variables are set', function() {
-            expect(scope.foo).toBeDefined();
+            expect(controller.foo).toBeDefined();
         });
     });
 });
