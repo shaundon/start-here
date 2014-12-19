@@ -51,3 +51,9 @@ In `Gruntfile.js`, you'll find a variable named `API_LOCATIONS`. During the buil
 ### I've built it, what now?
 
 All the compiled stuff is in `dist`.
+
+### Credits and Contributions
+
+CContributions are welcome, feel free to fork the repo and submit a pull request. Credit to 
+[@sadams](https://github.com/sadams) who got a lot of the stuff here up and running, particularly
+the externalised config for string replacements and Bower setup.
