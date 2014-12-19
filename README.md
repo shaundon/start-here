@@ -13,6 +13,8 @@ This is an AngularJS based front end application, with a pre-configured build pr
 
 ### How to run
 
+First, ensure you have a `config.json` file. You can copy `config.example.json` to get started.
+
 #### Dev (non minified, with source maps).
 
     grunt --target=dev
@@ -42,8 +44,8 @@ Look in `config.example.json`. It contains three example API locations:
     }
     
 During the build process, one of these strings is selected, and then placed into the compiled JS in the appropriate location.
-This is determined by a command line flag passed to grunt, `--string-replacment-target=<target>`, for example
-`--string-replacment-target=dev` to use `https://some-staging-url.com/app`. If this flag is omitted,
+This is determined by a command line flag passed to grunt, `--string-replacement-target=<target>`, for example
+`--string-replacement-target=dev` to use `https://some-staging-url.com/app`. If this flag is omitted,
 the `--target` flag will be used to determine this instead.
 
 This allows you to do fun things like build for `prod`, while inserting the `stage` API location.
