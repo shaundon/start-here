@@ -1,6 +1,6 @@
 ## Start Here
 
-This is an AngularJS based front end application, with a pre-configured build process that does the following things:
+This is the AngularJS seed app, on steroids / gamma radiation / vita-rays (whichever you prefer). You've got a basic app that conforms to all the AngularJS best practices (although they seem to change on a monthly basis..), then a pretty damn good build process, using Grunt, that does the following things:
 
 * Cleans the `dist` directory, if it exists.
 * Makes the `dist` directory, if it doesn't exist.
@@ -54,6 +54,6 @@ All the compiled stuff is in `dist`.
 
 ### Credits and Contributions
 
-CContributions are welcome, feel free to fork the repo and submit a pull request. Credit to 
+CContributions are welcome, fork that shit and submit a pull request. Credit to 
 [@sadams](https://github.com/sadams) who got a lot of the stuff here up and running, particularly
 the externalised config for string replacements and Bower setup.
