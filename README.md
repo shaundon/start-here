@@ -52,8 +52,12 @@ In `Gruntfile.js`, you'll find a variable named `API_LOCATIONS`. During the buil
 
 All the compiled stuff is in `dist`.
 
+### Run Standalone
+
+Run `grunt connect` for a standalone server.
+
 ### Credits and Contributions
 
-CContributions are welcome, fork that shit and submit a pull request. Credit to 
+Contributions are welcome, fork that shit and submit a pull request. Credit to 
 [@sadams](https://github.com/sadams) who got a lot of the stuff here up and running, particularly
 the externalised config for string replacements and Bower setup.
